@@ -1,0 +1,51 @@
+Some Terminologies:
+Tables are called Collection
+Rows are called Document
+Columns are called Field
+Joins are called Embedded documents, linking
+
+
+---------------------------------------------------------------------------
+show dbs - shows all databases
+use <db name> - connects to the particular database
+show tables - shows all the tables in the database
+show colletions - shows all the tables in the database
+db - to see which database you are currently in
+use <new db name> - will also create and switch to the newly created database
+
+#create user profile
+db.createUser({
+	user:"test",
+	pwd:"test",
+	roles:["readWrite","dbAdmin"]
+});
+
+
+#Create collections -- Collections are similar to tables in database
+db.createCollection('customers');
+
+#See collections in this db
+show collections
+
+
+#Insert documents in the collection - "customers"
+db.customers.insert({firstname:"Shubham",lastname:"roy",sex:"Male"});
+
+#to see documents in the collection - "customers"
+db.customers.find();
+
+#insert array of documents in the collection - "customers"
+db.customers.insert([{firstname:"Joe",lastname:"Turner",sex:"Male"},{firstname:"Asha",lastname:"Sebi",sex:"Female"}]);
+
+#find command with pretty looking result
+db.customers.find().pretty();
+
+#update a document - the first bracket is like the where condition in sql
+db.customers.update({firstname:"Shubham"},{firstname:"Shubham",lastname:"Choudhury",Sex:"Male"});
+-- here we have to give all the fields for update, else it will remove the field not 
+given and only update the field given
+
+#update a document - only update the field needed and not give all the fields
+db.customers.update({firstname:"Shubham"},{$set:{lastname:"RoyC"}});
+
+
